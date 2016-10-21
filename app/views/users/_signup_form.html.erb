@@ -1,0 +1,20 @@
+<div class="signup-form">
+	<%= form_for(:user, :url => {:controller => 'users', :action => 'create'}) do |f| %>
+		<h1>Sign Up</h1>
+		<div class="form-group">
+			<span class="label">Username/email</span>
+			<%= f.text_field "username", class: "form-control" %>
+		</div>
+		<div class="form-group">
+			<span class="label">Password</span>
+			<%= f.password_field "password", class: "form-control" %>
+		</div>
+		<div class="form-group">
+			<span class="label">Password Comfirm</span>
+			<%= f.password_field "password_confirmation", class: "form-control" %>
+		</div>
+		<div class="form-group">
+	        <%= f.submit 'Sign Up', class: 'btn btn-block btn-info' %>
+	    </div>
+	<% end %>
+</div>

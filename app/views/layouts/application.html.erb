@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Chatwithfriend2</title>
+    <title>Chatwithfriend</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -9,6 +9,60 @@
   </head>
 
   <body>
-    <%= yield %>
+    <nav class="navbar navbar-light bg-faded">
+        <div class="container">
+        <a class="navbar-brand" href="/">chatwithfriend</a>
+         <ul class="nav navbar-nav">
+            <% if signed_in %>
+              <li class="nav-item active">
+                <a class="nav-link" href="/logout">Logout</a>
+              </li> 
+            <% else %>
+              <li class="nav-item <% if(current_page?('/login'))%> active <% end %>">
+                <a class="nav-link" href="/login">Login <span class="sr-only"></span></a>
+              </li>
+              <li class="nav-item <% if(current_page?('/signup'))%> active <% end %>">
+                <a class="nav-link" href="/signup">Sign Up</a>
+              </li>
+            <% end %>            
+         </ul>       
+       </div>
+    </nav>
+    
+    <div class="container">      
+      <div class="row flash-message">
+          <% if flash.any? %>
+            <% flash.each do |key, value| %>
+            <div class="alert alert-<%= key %>" role="alert">
+              <%= value %>
+            </div>
+            <% end %>
+          <% end %>
+      </div>
+    </div>
+
+    <div class="container">      
+      <div class="row wrapper">
+      <% if signed_in %>
+        <div class="col-xs-3">
+          <ul class="main-menu">
+            
+          </ul>  
+        </div>
+        <div class="col-xs-9">
+          <%= yield %>
+        </div>
+      <% else %>
+        <%= yield %>
+      <% end %>
+      </div>
+    </div>
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-bar">
+          2016@chatwithfriend
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

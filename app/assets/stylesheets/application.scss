@@ -1,0 +1,52 @@
+@import "bootstrap";
+
+.navbar{
+	position: fixed;
+    width: 100%;
+    top: 0px;
+    z-index: 1000;
+    border-radius: 0px;
+    background: rgba(255, 179, 152, 0.9);
+    .navbar-nav{
+    	float: right;
+    	a:hover{
+    		text-decoration: underline;
+    	}
+    }
+}
+.flash-message{
+	text-align: center;
+    width: 30%;
+    /* margin-left: auto; */
+    /* margin-right: auto; */
+    margin-top: 70px;
+    position: fixed;
+    display: block;
+    z-index: 100;
+    left: 50%;
+    margin-left: -15%;
+}
+.wrapper{
+	display: block;
+	min-height: 500px;
+	margin-top:80px;
+}
+.footer{
+	background: #ccc;
+    padding: 10px 0px;
+	.footer-bar{
+		text-align: center;
+	}
+}
+
+.form-box{
+	width: 400px;	
+	margin: auto;
+	padding-top: 55px;
+	.addition-form{
+		text-align: center;
+		a{
+			display: block;
+		}
+	}
+}
