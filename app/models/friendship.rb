@@ -8,5 +8,5 @@ class Friendship < ApplicationRecord
 
 	scope :between, ->(user_id, friend_id) do
 		where("(friendships.user_id = ? and friendships.friend_id = ?) or (friendships.friend_id = ? and friendships.user_id = ?)", user_id, friend_id, user_id, friend_id)
-	end
+	end	
 end

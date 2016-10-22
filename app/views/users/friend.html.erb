@@ -1,11 +1,49 @@
 <ul class="user-list">
-	<% @friends.each do |f| %>		
+	<% @friendships.each do |f| %>		
 		<li>
 			<ul>
-				<li><b><%= f.username %></b></li>
+				<li><b><%= f.friend.username %></b></li>
 				<li>
+				<% if friendIsBlocked(f) %>
+					<%= form_tag(:controller => "friendships", :action => "unblock", remote: true) do %>
+						<%= hidden_field_tag 'friend_id', f.friend.id %>
+						<%= submit_tag "Unblock friend" %>
+					<% end %>
+				<% else %>
+					<%= form_tag(:controller => "friendships", :action => "block", remote: true) do %>
+						<%= hidden_field_tag 'friend_id', f.friend.id %>
+						<%= submit_tag "Block friend" %>
+					<% end %>
+				<% end %>
+				&nbsp;				
 					<%= form_tag(:controller => "friendships", :action => "destroy", remote: true) do %>
-						<%= hidden_field_tag 'friend_id', f.id %>
+						<%= hidden_field_tag 'friend_id', f.friend.id %>
+						<%= submit_tag "Remove friend" %>
+					<% end %>
+				</li>
+			</ul> 
+		</li>
+	<% end %>
+
+	<% @inverse_friendships.each do |f| %>		
+		<li>
+			<ul>
+				<li><b><%= f.user.username %></b></li>
+				<li>
+				<% if friendIsBlocked(f) %>
+					<%= form_tag(:controller => "friendships", :action => "unblock", remote: true) do %>
+						<%= hidden_field_tag 'friend_id', f.user.id %>
+						<%= submit_tag "Unblock friend" %>
+					<% end %>
+				<% else %>
+					<%= form_tag(:controller => "friendships", :action => "block", remote: true) do %>
+						<%= hidden_field_tag 'friend_id', f.user.id %>
+						<%= submit_tag "Block friend" %>
+					<% end %>
+				<% end %>
+				&nbsp;
+					<%= form_tag(:controller => "friendships", :action => "destroy", remote: true) do %>
+						<%= hidden_field_tag 'friend_id', f.user.id %>
 						<%= submit_tag "Remove friend" %>
 					<% end %>
 				</li>

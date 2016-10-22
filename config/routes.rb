@@ -20,6 +20,8 @@ Rails.application.routes.draw do
   # resources :friendships
   post 'friendships/create'
   post 'friendships/destroy'
+  post 'friendships/block'
+  post 'friendships/unblock'
 
   root 'index#index'
 

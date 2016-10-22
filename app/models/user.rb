@@ -40,4 +40,49 @@ class User < ApplicationRecord
 		@friendship = Friendship.between(self.id, friend_id)
 		@friendship.destroy_all
 	end
+
+	def block_friend(friend_id)
+		@status = nil
+		@friendship = Friendship.between(self.id, friend_id).first
+		puts @friendship.status
+		puts !@friendship.status.nil?
+		if !@friendship.status.nil?
+			@status = 3 # they block another
+		else	
+			if @friendship.user_id == self.id
+				@status = 1 # A block B - user_id block friend_id
+			else
+				@status = 2 # B block A - friend_id block user_id
+			end
+		end
+		@friendship.update(:status => @status)
+	end
+
+	def unblock_friend(friend_id)
+		@friendship = Friendship.between(self.id, friend_id).first
+		@selfIsA = false
+		if @friendship.user_id == self.id 
+			@selfIsA = true
+		end
+
+		@status = nil
+		if !@friendship.status.nil?
+			if @friendship.status == 1 && @selfIsA
+				@status = nil
+			end
+
+			if @friendship.status == 2 && !@selfIsA
+				@status = nil
+			end
+
+			if @friendship.status == 3 && @selfIsA
+				@status = 2
+			end
+
+			if @friendship.status == 3 && !@selfIsA
+				@status = 1
+			end
+		end		
+		@friendship.update(:status => @status)
+	end
 end
