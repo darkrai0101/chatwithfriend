@@ -1,15 +1,18 @@
-<ul>
-<% @users.each do |user| %>
-	<% if user.id == current_user.id %>
-	<% else %>
-		<li>
-			<b><%= user.username %></b>
-			<%= form_tag(:controller => "conversations", :action => "create", remote: true) do %>
-				<%= hidden_field_tag 'recipient_id', user.id %>
-				<%= hidden_field_tag 'sender_id', current_user.id %>
-				<%= submit_tag "send message" %>
-			<% end %>
-		</li>
+<ul class="user-list">
+	<% @users.each do |user| %>
+		<% if user.id == current_user.id %>
+		<% else %>
+			<li>
+				<ul>
+					<li><b><%= user.username %></b></li>
+					<li>
+						<%= form_tag(:controller => "friendships", :action => "create", remote: true) do %>
+							<%= hidden_field_tag 'friend_id', user.id %>
+							<%= submit_tag "Add to list friend" %>
+						<% end %>
+					</li>
+				</ul> 
+			</li>
+		<% end %>
 	<% end %>
-<% end %>
 </ul>

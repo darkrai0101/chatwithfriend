@@ -1,5 +1,5 @@
-Rails.application.routes.draw do
-  
+Rails.application.routes.draw do  
+
   get 'messages/show'
   get 'messages/new'
   post 'messages/create'
@@ -13,8 +13,13 @@ Rails.application.routes.draw do
   match "inbox" => "messages#inbox", via: :get
   match "sent" => "messages#sent", via: :get
 
+  match "friend" => "users#friend", via: :get
+
   resources :users
   resources :messages
+  # resources :friendships
+  post 'friendships/create'
+  post 'friendships/destroy'
 
   root 'index#index'
 

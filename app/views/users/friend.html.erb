@@ -1,0 +1,15 @@
+<ul class="user-list">
+	<% @friends.each do |f| %>		
+		<li>
+			<ul>
+				<li><b><%= f.username %></b></li>
+				<li>
+					<%= form_tag(:controller => "friendships", :action => "destroy", remote: true) do %>
+						<%= hidden_field_tag 'friend_id', f.id %>
+						<%= submit_tag "Remove friend" %>
+					<% end %>
+				</li>
+			</ul> 
+		</li>
+	<% end %>
+</ul>

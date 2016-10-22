@@ -9,7 +9,9 @@ class MessagesController < ApplicationController
   end
 
   def new
+    load_user
   	@message = Message.new
+    @friends = @user.friendships.all
   end
 
   def create
@@ -17,6 +19,7 @@ class MessagesController < ApplicationController
   	@message = @user.sent_messages.build(messages_params)
   	if @message.save
   		flash.now[:success] = "sent message success!"
+      redirect_to sent_path
   	else
   		flash.now[:warning] = "sent message fail!"
   	end

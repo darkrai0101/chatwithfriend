@@ -78,8 +78,11 @@
     li:nth-child(odd) {
         background: #e6e6e6;
     }
-    li:hover{
+    li:nth-child(odd) {
         background: #f7f7f7;
+    }
+    li:hover{
+        background: #b5b5b5;
     }    
     a{
         display: block;
@@ -91,4 +94,37 @@
     .unread{
         font-weight: bolder;   
     }
+}
+
+.user-list{
+    display: block;
+    > li{
+        list-style: none;
+        height: 36px;
+        padding-top: 4px;
+        border-bottom: 1px solid #ccc;        
+        ul{
+            li{
+                display: inline-block;
+
+                input[type="submit"]{
+                    background: none;
+                    border: none;
+                    outline: none;  
+                }
+                input[type="submit"]:hover{
+                    text-decoration: underline;
+                }
+            }
+            li:nth-child(1){
+                width: 70%;
+            }
+            li:nth-child(2){
+                width: 28%;
+            }
+        }
+    }
+    > li:last-child{
+        border-bottom: none;
+    }    
 }
