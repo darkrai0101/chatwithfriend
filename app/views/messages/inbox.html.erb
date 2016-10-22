@@ -1,0 +1,17 @@
+<ul class="inbox-page">
+	<% @messages.each do |message| %>
+		<% if message.read_at.nil? %>
+		<li class="unread">
+		<% else %>
+		<li>
+		<% end %>
+			<a href="/messages/<%= message.id %>">
+				<div class="row">
+					<div class="m-sender col-xs-3"><%= message.sender.username %></div>
+					<div class="m-body col-xs-6"><%= message.body %></div>
+					<div class="m-time col-xs-3"><%= message.created_at %></div>
+				</div>
+			</a>
+		</li>
+	<% end %>
+</ul>

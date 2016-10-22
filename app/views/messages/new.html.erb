@@ -1,0 +1,14 @@
+<%= form_for @message do |f| %>
+	<div class="form-group">
+		<label for="recipient_id">To:</label>
+		<%= f.text_field :recipient_id, class: "form-control" %>
+	</div>
+	<div class="form-group">
+		<!-- <label for="recipient_id">Body:</label> -->
+		<%= f.text_area :body, class: "form-control" %>
+	</div>
+	<div class="form-group">
+		<%= f.submit 'Send', class: 'btn btn-success' %>
+		<a href="/inbox"><%= button_tag 'Cancel', class: 'btn  btn-danger' %></a>
+	</div>
+<% end %>
