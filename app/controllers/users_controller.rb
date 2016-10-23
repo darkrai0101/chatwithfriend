@@ -20,16 +20,23 @@ class UsersController < ApplicationController
   end
 
   def create
-  	@user = User.new(users_params)
-  	if @user.save
-  	  flash[:success] = "You are signup successfully"
-  	  # flash[:color] = "valid"
-      redirect_to login_path
-  	else
-  	  flash.now[:danger] = "Form is invalid"
-  	  # flash[:color] = "invalid"  	  
+    @check = User.where(username: users_params[:username]).first
+    if !@check.nil?
+      flash[:danger] = "username is not avaiable!"
+      # flash[:color] = "valid"
       render "new"
-  	end
+    else
+    	@user = User.new(users_params)
+    	if @user.save
+    	  flash[:success] = "You are signup successfully"
+    	  # flash[:color] = "valid"
+        redirect_to login_path
+    	else
+    	  flash.now[:danger] = "Form is invalid"
+    	  # flash[:color] = "invalid"  	  
+        render "new"
+    	end
+    end
   end
 
 private

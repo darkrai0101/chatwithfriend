@@ -54,7 +54,7 @@
 .main-menu{
     li{
         list-style: none;
-        height: 30px;
+        min-height: 30px;
         a{
             display: block;
             padding: 2px 10px;
@@ -103,7 +103,7 @@
     display: block;
     > li{
         list-style: none;
-        height: 50px;
+        min-height: 50px;
         line-height: 44px;
         border-bottom: 1px solid #ccc;        
         ul{
