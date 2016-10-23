@@ -4,6 +4,12 @@ class Message < ApplicationRecord
 
 	validates_presence_of :body, :sender_id, :recipient_id	
 
+	scope :unread, -> { where(read_at: nil) }
+
+	scope :unread_user, -> (user) do
+	 	where("read_at = ? and recipient_id = ? and status = ?", nil, user.id, nil)
+	end
+
 	def mark_as_read!
 		self.read_at = Time.now
 		save!

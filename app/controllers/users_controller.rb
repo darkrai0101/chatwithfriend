@@ -26,7 +26,7 @@ class UsersController < ApplicationController
   	  # flash[:color] = "valid"
       redirect_to login_path
   	else
-  	  flash.now[:notice] = "Form is invalid"
+  	  flash.now[:danger] = "Form is invalid"
   	  # flash[:color] = "invalid"  	  
       render "new"
   	end

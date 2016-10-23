@@ -7,7 +7,7 @@
 		<% end %>			
 			<div class="row">
 				<div class="m-sender col-xs-3"><%= message.recipient.username %></div>
-				<div class="m-body col-xs-6"><%= message.body %></div>
+				<div class="m-body col-xs-6"><%= message.body[0..6] + '***' %></div>
 				<div class="m-time col-xs-3">
 				<% if message.read_at.nil? %> 
 					<%= "unread" %> 

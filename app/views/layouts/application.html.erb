@@ -34,11 +34,15 @@
     
     <div class="container">      
       <div class="row flash-message">
+          <!-- <div class="alert alert-success" role="alert">add friend success!</div> -->
           <% if flash.any? %>
             <% flash.each do |key, value| %>
             <div class="alert alert-<%= key %>" role="alert">
               <%= value %>
             </div>
+            <script>
+              $(".alert-success" ).fadeOut(4000);
+            </script>
             <% end %>
           <% end %>
       </div>
@@ -49,12 +53,12 @@
       <% if signed_in %>
         <div class="col-xs-3">
           <ul class="main-menu">
-            <li><a href="/inbox">Inbox (14)</a></li>
-            <li><a href="/sent">Sent Messages</a></li>
-            <li><a href="/messages/new">New Message</a></li>
+            <li class="<% if(current_page?('/inbox'))%> active <% end %>"><a href="/inbox">Inbox (<%= render 'layouts/count_unread_message' %>)</a></li>
+            <li class="<% if(current_page?('/sent'))%> active <% end %>"><a href="/sent">Sent Messages</a></li>
+            <li class="<% if(current_page?('/messages/new'))%> active <% end %>"><a href="/messages/new">New Message</a></li>
             
-            <li><a href="/friend">Friend Lists (20)</a></li>
-            <li><a href="/users">Add Friends</a></li>
+            <li class="<% if(current_page?('/friend'))%> active <% end %>"><a href="/friend">Friend Lists (<%= render 'layouts/count_friend' %>)</a></li>
+            <li class="<% if(current_page?('/users'))%> active <% end %>"><a href="/users">Add Friends</a></li>
           </ul>  
         </div>
         <div class="col-xs-9">

@@ -1,7 +1,7 @@
 <%= form_for @message do |f| %>
 	<div class="form-group">
 		<label for="recipient_id">To:</label>		
-		<%= f.select :recipient_id, @friends.collect { |p| [ p.friend.username, p.friend.id ] }, include_blank: true, class: "form-control custom-select" %>		
+		<%= f.select :recipient_id, @friends.collect { |p| [ p.friend.username, p.friend.id ] } + @inverse_friends.collect { |p| [ p.user.username, p.user.id ] }, {include_blank: true}, {:class => "custom-select"} %>		
 	</div>
 	<div class="form-group">
 		<!-- <label for="recipient_id">Body:</label> -->

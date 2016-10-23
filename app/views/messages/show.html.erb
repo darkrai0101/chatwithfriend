@@ -1,3 +1,9 @@
 <h4><%= @message.sender.username %></h4>
 <i><%= @message.created_at %></i>
-<div><%= @message.body %></div>
+<div>
+<% if @isFistRead %>
+	<%= @message.body %>
+<% else %>
+	<h4 style="text-align: center">This message has been read!</h4>
+<% end %>
+</div>

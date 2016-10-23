@@ -29,7 +29,7 @@
 .wrapper{
 	display: block;
 	min-height: 500px;
-	margin-top:80px;
+	margin-top:120px;
 }
 .footer{
 	background: #ccc;
@@ -42,7 +42,7 @@
 .form-box{
 	width: 400px;	
 	margin: auto;
-	padding-top: 55px;
+	padding-top: 15px;
 	.addition-form{
 		text-align: center;
 		a{
@@ -67,6 +67,9 @@
     }
     li:hover{
         background: #ccc;
+    }
+    li.active{
+        background: #a3a3a3;
     }
 }
 
@@ -100,8 +103,8 @@
     display: block;
     > li{
         list-style: none;
-        height: 36px;
-        padding-top: 4px;
+        height: 50px;
+        line-height: 44px;
         border-bottom: 1px solid #ccc;        
         ul{
             li{
@@ -128,6 +131,15 @@
         }
     }
     > li:last-child{
-        border-bottom: none;
+        // border-bottom: none;
     }    
+}
+
+.new_message{
+    select{
+        
+    }
+    textarea{
+        height: 224px;
+    }
 }

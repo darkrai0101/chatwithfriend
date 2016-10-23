@@ -3,20 +3,29 @@ class MessagesController < ApplicationController
 
   def show
     @message = Message.find(params[:id])
+    @isFistRead = false
     if @message.read_at.nil? && current_user = @message.recipient
       @message.mark_as_read!
+      @isFistRead = true
     end
   end
 
   def new
     load_user
   	@message = Message.new
-    @friends = @user.friendships.all
+    @friends = @user.friendships
+    @inverse_friends = @user.inverse_friendships
   end
 
   def create
     load_user
-  	@message = @user.sent_messages.build(messages_params)
+    @status = nil
+    if @user.is_blocked_by_friend(messages_params[:recipient_id])
+      @status = 1
+    end
+
+    @message = @user.sent_messages(@status).build({recipient_id: messages_params[:recipient_id], body: messages_params[:body], status: @status})
+  	# @message = @user.sent_messages(@status).build(messages_params + {status: @status})
   	if @message.save
   		flash.now[:success] = "sent message success!"
       redirect_to sent_path

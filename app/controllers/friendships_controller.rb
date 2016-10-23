@@ -4,26 +4,28 @@ class FriendshipsController < ApplicationController
   def create
   	@friendship = current_user.add_friend(params[:friend_id])
   	if !@friendship.nil? && @friendship.save
-  		flash[:notice] = "add friend success"
-  		redirect_to root_path
+  		flash[:success] = "add friend success!"
+  		redirect_to users_path
   	else
-  		flash[:error] = "add friend fail"
+  		flash[:danger] = "add friend fail"
   	end
   end
 
   def destroy  	
     current_user.remove_friend(params[:friend_id])
-  	flash[:notice] = "deleted friend"
-  	redirect_to users_path
+  	flash[:success] = "remov friend success!"
+  	redirect_to friend_path
   end
 
   def block
     current_user.block_friend(params[:friend_id])
-    flash[:notice] = "blocked friend"
+    flash[:success] = "block friend success!"
+    redirect_to friend_path
   end
 
   def unblock
     current_user.unblock_friend(params[:friend_id])
-    flash[:notice] = "unblocked friend"
+    flash[:success] = "unblock friend success!"
+    redirect_to friend_path
   end
 end

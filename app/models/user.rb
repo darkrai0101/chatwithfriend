@@ -9,15 +9,15 @@ class User < ApplicationRecord
 	scope :all_except, ->(user) { where.not(id: (user.friends + user.inverse_friends + [user]).map(&:id))}
 
 	def received_messages
-		Message.where(recipient: self)
+		Message.where(recipient: self, status: nil)
 	end
 
-	def sent_messages
-		messages(sender: self)
+	def sent_messages(status)
+		messages(sender: self, status: status)
 	end
 
 	def latest_received_messages(n)
-	    received_messages.order(created_at: :desc).limit(n)
+	    received_messages.where(status: nil).order(created_at: :desc).limit(n)
 	end
 
 	def latest_sent_messages(n)
@@ -84,5 +84,24 @@ class User < ApplicationRecord
 			end
 		end		
 		@friendship.update(:status => @status)
+	end
+
+	def is_blocked_by_friend(friend_id)
+		@friendship = Friendship.between(self.id, friend_id).first
+		@selfIsA = @friendship.user_id == self.id ? true : false
+
+		if @friendship.status == 3
+			return true
+		end
+
+		if @selfIsA && @friendship.status == 2
+			return true
+		end
+
+		if !@selfIsA && @friendship.status == 1
+			return true
+		end
+
+		return false
 	end
 end
